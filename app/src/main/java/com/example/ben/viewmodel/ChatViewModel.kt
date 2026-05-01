@@ -19,7 +19,7 @@ class ChatViewModel : ViewModel() {
     private var _model = MutableLiveData<String>()
 
     private var _messageList = MutableLiveData<MutableList<Message>>(mutableListOf())
-    private var _isLoading = MutableLiveData<Boolean>(false)
+    private var _isLoading = MutableLiveData(false)
 
     val messageList: LiveData<MutableList<Message>> = _messageList
     val isLoading: LiveData<Boolean> = _isLoading
@@ -51,7 +51,7 @@ class ChatViewModel : ViewModel() {
                     )
                 )
 
-                val apiKey = "你的API KEY"
+                val apiKey = "YOUR API KEY"
                 val response = RetrofitClient.apiService.sendChat(apiKey, request)
 
                 val aiContent = response.choices.firstOrNull()?.message?.content
@@ -76,15 +76,11 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun clearMessages() {
-        _messageList.value = mutableListOf()
-        messageIdCounter = 0
-    }
     fun modifyModel(position: Int) {
         _model.value=when(position){
             0 -> "deepseek-chat"
             1 -> "deepseek-coder"
-            2 -> "deepseek-r1"
+            2 -> "deepseek-reasoner"
             else -> "deepseek-chat"
         }
     }
