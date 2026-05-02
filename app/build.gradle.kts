@@ -1,3 +1,4 @@
+import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.devtools.ksp")
@@ -10,9 +11,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     defaultConfig {
+
         applicationId = "com.example.ben"
         minSdk = 24
         targetSdk = 36
@@ -20,6 +23,17 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // 从 local.properties 读取 API 密钥
+        val propertiesFile = rootProject.file("local.properties")
+        if (propertiesFile.exists()) {
+            val properties = Properties()
+            properties.load(propertiesFile.inputStream())
+            val apiKey = properties.getProperty("api.key", "")
+            buildConfigField("String", "API_KEY", "\"$apiKey\"")
+        } else {
+            buildConfigField("String", "API_KEY", "\"\"")
+        }
     }
 
     buildTypes {
@@ -75,7 +89,11 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    // RxJava3
+    implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
 
+// ... existing code ...
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")

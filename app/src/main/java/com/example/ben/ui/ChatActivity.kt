@@ -11,11 +11,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ben.R
 import com.example.ben.adapter.ChatAdapter
 import com.example.ben.databinding.ActivityChatBinding
 import com.example.ben.viewmodel.ChatViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ChatActivity : AppCompatActivity() {
     private val binding: ActivityChatBinding by lazy { ActivityChatBinding.inflate(layoutInflater) }
@@ -26,19 +29,18 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-
         ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         initView()
         initObserver()
         initEvent()
     }
 
     private fun initView() {
+        val id : Long = intent.getLongExtra("id",0)
         binding.apply {
             tvAi.typeface = Typeface.createFromAsset(assets, "FZSTK.TTF")
             rvChat.apply {
@@ -49,8 +51,7 @@ class ChatActivity : AppCompatActivity() {
                 }
             }
         }
-        binding.spModel
-        val models =arrayOf("deepseek-chat 适合日常聊天","deepseek-coder 适合处理代码","deepseek-r1 深度思考处理")
+        val models =arrayOf("deepseek-v4-flash 快速响应","deepseek-v4-pro 复杂任务")
         val spAdapter = ArrayAdapter(this,android.R.layout.simple_spinner_item,models)
         spAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spModel.adapter=spAdapter
@@ -63,7 +64,6 @@ class ChatActivity : AppCompatActivity() {
             ) {
                 viewModel.modifyModel(p2)
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 viewModel.modifyModel(0)
             }
@@ -93,7 +93,6 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    //设置布局
     private fun isUserNearBottom(): Boolean {
         val layoutManager = binding.rvChat.layoutManager as LinearLayoutManager
         val lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition()
@@ -106,7 +105,7 @@ class ChatActivity : AppCompatActivity() {
         binding.btnSend.setOnClickListener {
             val content = binding.etMessage.text.toString().trim()
             if (content.isNotBlank()) {
-                viewModel.addMyMessage(content)
+                viewModel.callAi(content)
                 binding.etMessage.text.clear()
             } else {
                 Toast.makeText(this, "请输入消息内容", Toast.LENGTH_SHORT).show()

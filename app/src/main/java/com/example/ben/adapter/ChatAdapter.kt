@@ -50,7 +50,7 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(message: Message.AiMessage) {
-            binding.tvMessage.text = message.message
+            binding.tvMessage.text = message.content
         }
     }
 
@@ -59,17 +59,13 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(message: Message.MyMessage) {
-            binding.tvMessage.text = message.message
+            binding.tvMessage.text = message.content
         }
     }
 
     class MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
         override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
-            return when {
-                oldItem is Message.MyMessage && newItem is Message.MyMessage -> oldItem.id == newItem.id
-                oldItem is Message.AiMessage && newItem is Message.AiMessage -> oldItem.id == newItem.id
-                else -> false
-            }
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
