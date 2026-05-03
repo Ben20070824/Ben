@@ -1,4 +1,4 @@
-package com.example.ben.ui
+package com.example.ben.ui.activity
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -11,14 +11,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ben.R
 import com.example.ben.adapter.ChatAdapter
 import com.example.ben.databinding.ActivityChatBinding
 import com.example.ben.viewmodel.ChatViewModel
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class ChatActivity : AppCompatActivity() {
     private val binding: ActivityChatBinding by lazy { ActivityChatBinding.inflate(layoutInflater) }
@@ -110,6 +106,9 @@ class ChatActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "请输入消息内容", Toast.LENGTH_SHORT).show()
             }
+        }
+        binding.btnMenu.setOnClickListener {
+            MainActivity.start(this)
         }
     }
 }
