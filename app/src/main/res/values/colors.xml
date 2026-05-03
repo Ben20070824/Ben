@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- 黑白基础 -->
+    <color name="color_white">#FFFFFFFF</color>
+    <color name="color_black">#FF000000</color>
+
+    <!-- 主题主色 -->
+    <color name="color_primary">#1677FF</color>
+    <color name="color_primary_light">#40A9FF</color>
+
+    <!-- 文字色 -->
+    <color name="text_main">#1D2129</color>
+    <color name="text_secondary">#8A8F98</color>
+    <color name="text_hint">#B4B9C0</color>
+    <!-- 新增 日间浅绿色 -->
+    <color name="color_green_light">#E6F7EF</color>
+    <color name="color_green">#36CFC9</color>
+    <!-- 背景色 -->
+    <color name="bg_root">#F5F7FA</color>
+    <color name="bg_card">#FFFFFF</color>
+
+    <!-- 分割线 / 边框 -->
+    <color name="line_color">#E5E6EB</color>
+
+    <!-- 功能色 -->
+    <color name="color_success">#00B42A</color>
+    <color name="color_warning">#FF7D00</color>
+    <color name="color_danger">#F53F3F</color>
 </resources>
