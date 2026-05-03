@@ -1,0 +1,24 @@
+<!--
+  ~ Copyright (C) 2026 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="1024"
+    android:viewportHeight="1024">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M806.5,115.9c11.5,44 26.5,75.8 45,95.2 19.2,20.5 52.1,38.4 98.8,54.1a32,32 0,0 1,0 60.6c-46.7,15.7 -79.6,33.7 -98.8,54.1 -18.4,19.5 -33.5,51.2 -45,95.2a32,32 0,0 1,-61.9 0c-11.5,-43.9 -26.5,-75.7 -45,-95.2 -19.3,-20.4 -52.2,-38.4 -98.8,-54a32,32 0,0 1,0 -60.7c46.6,-15.7 79.5,-33.7 98.8,-54.1 18.4,-19.5 33.4,-51.2 44.9,-95.2a32,32 0,0 1,62 0zM746.2,336a221,221 0,0 0,-54.2 -40.4,219.3 219.3,0 0,0 54.2,-40.4 197.1,197.1 0,0 0,29.3 -41.3c8.8,16.1 18.6,29.9 29.4,41.3 13.9,14.8 32,28.2 54.2,40.4 -22.2,12.2 -40.3,25.7 -54.2,40.4a198.4,198.4 0,0 0,-29.4 41.3,197.1 197.1,0 0,0 -29.3,-41.3zM450,300.3c21.4,82.4 50,142.5 85.6,180.3 36.9,39.3 98.7,73.6 185.3,102.7a32,32 0,0 1,0 60.6c-86.5,29.2 -148.3,63.4 -185.3,102.7 -35.6,37.8 -64.1,97.9 -85.6,180.3a32,32 0,0 1,-62 0c-21.5,-82.4 -50.1,-142.5 -85.6,-180.3 -37,-39.3 -98.8,-73.5 -185.3,-102.7a32,32 0,0 1,0 -60.6c86.5,-29.3 148.3,-63.5 185.3,-102.7 35.5,-37.8 64,-98 85.6,-180.3a32,32 0,0 1,62 0zM215.3,613.6c57.8,26.1 102.3,55.8 133.7,89.2 27,28.7 50.3,66.7 70,114.1 19.6,-47.4 42.9,-85.3 70,-114.1 31.3,-33.4 75.9,-63.1 133.6,-89.2 -57.8,-26.1 -102.3,-55.8 -133.6,-89.2 -27.1,-28.8 -50.3,-66.7 -70,-114 -19.6,47.3 -43,85.3 -70,114 -31.4,33.4 -75.9,63.1 -133.6,89.2z"/>
+</vector>
