@@ -12,7 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ben.R
 import com.example.ben.databinding.ActivityEditBinding
-import com.example.ben.viewmodel.EditViewModel
+import com.example.ben.viewmodel.user.EditViewModel
 
 class EditActivity : AppCompatActivity() {
     private val binding by lazy { ActivityEditBinding.inflate(layoutInflater) }
@@ -32,6 +32,9 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun initEvent() {
+        binding.btnChange.setOnClickListener {
+            Toast.makeText(this,"更多功能，敬请期待！", Toast.LENGTH_SHORT).show()
+        }
         binding.btnEdit.setOnClickListener {
             val account = binding.etAccountText.text.toString().trim()
             val nickname = binding.etNickName.text.toString().trim()
@@ -60,7 +63,7 @@ class EditActivity : AppCompatActivity() {
             val university = binding.etUniversityText.text.toString().trim()
             val signature = binding.etSignatureText.text.toString().trim()
 
-            viewModel.editSucceed(account, nickname, gender, age, birth, city, university, signature)
+            viewModel.updateUser(account, nickname, gender, age, birth, city, university, signature)
         }
 
         binding.btnBack.setOnClickListener {

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.ben.databinding.FragmentProfileBinding
-import com.example.ben.viewmodel.ProfileViewModel
+import com.example.ben.viewmodel.user.ProfileViewModel
 import com.example.ben.ui.activity.EditActivity
 
 class ProfileFragment : Fragment(){

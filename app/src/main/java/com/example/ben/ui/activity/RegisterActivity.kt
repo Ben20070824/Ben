@@ -13,7 +13,7 @@ import com.example.ben.R
 import com.example.ben.data.room.UserDataBase
 import com.example.ben.data.room.UserDao
 import com.example.ben.databinding.ActivityRegisterBinding
-import com.example.ben.viewmodel.RegisterViewModel
+import com.example.ben.viewmodel.user.RegisterViewModel
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var userDao: UserDao

@@ -1,17 +1,16 @@
-package com.example.ben.viewmodel
+package com.example.ben.viewmodel.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.MyApplication
+import com.example.ben.data.respository.UserRepository
 import com.example.ben.data.room.UserDataBase
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
-    private val userDao by lazy {
-        UserDataBase.getDatabase().userDao()
-    }
+    private val userRepository = UserRepository()
     var _loginState = MutableLiveData(false)
     var _toastMsg = MutableLiveData<String>()
 
@@ -20,7 +19,7 @@ class LoginViewModel : ViewModel() {
 
     fun doLogin(account : String, password: String){
         viewModelScope.launch {
-            val user = userDao.getUserByAccountUser(account)
+            val user = userRepository.getUserByAccount(account)
             if (user == null) {
                 _toastMsg.value = "用户不存在"
                 return@launch
