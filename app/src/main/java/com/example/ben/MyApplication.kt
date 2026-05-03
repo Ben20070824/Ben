@@ -9,6 +9,7 @@ class MyApplication : Application() {
             private set
 
         var account: String = ""
+        var title: String = ""
     }
 
     override fun onCreate() {

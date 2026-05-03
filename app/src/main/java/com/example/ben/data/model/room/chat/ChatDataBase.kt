@@ -1,4 +1,4 @@
-package com.example.ben.data.model.room1
+package com.example.ben.data.model.room.chat
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

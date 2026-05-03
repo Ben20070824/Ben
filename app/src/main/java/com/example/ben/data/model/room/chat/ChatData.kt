@@ -1,4 +1,4 @@
-package com.example.ben.data.model.room1
+package com.example.ben.data.model.room.chat
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -13,5 +13,9 @@ data class ChatData(
     @PrimaryKey(true)
     val id: Long = 0,
     @ColumnInfo
-    val chatList: List<Message>
+    val account: String,
+    @ColumnInfo
+    val chatList: List<Message>,
+    @ColumnInfo
+    val title: String
 )

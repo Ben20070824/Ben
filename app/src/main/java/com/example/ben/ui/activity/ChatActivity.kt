@@ -1,5 +1,7 @@
 package com.example.ben.ui.activity
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
@@ -11,15 +13,18 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ben.adapter.ChatAdapter
+import com.example.ben.adapter.rvadapter.ChatAdapter
 import com.example.ben.databinding.ActivityChatBinding
-import com.example.ben.viewmodel.ChatViewModel
+import com.example.ben.viewmodel.chat.ChatViewModel
+import kotlinx.coroutines.launch
 
 class ChatActivity : AppCompatActivity() {
     private val binding: ActivityChatBinding by lazy { ActivityChatBinding.inflate(layoutInflater) }
     private val viewModel: ChatViewModel by viewModels()
     private val mAdapter = ChatAdapter()
+    private var chatId: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +35,34 @@ class ChatActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        chatId = getChatId()
+
         initView()
         initObserver()
         initEvent()
+        initData()
+    }
+
+    private fun initData() {
+        if (chatId > 0) {
+            lifecycleScope.launch {
+                viewModel.initChat(chatId)
+            }
+        }
+    }
+
+    private fun getChatId(): Long {
+        return try {
+            val field = ChatActivity::class.java.getDeclaredField("id")
+            field.isAccessible = true
+            field.getLong(null)
+        } catch (e: Exception) {
+            -1L
+        }
     }
 
     private fun initView() {
-        val id : Long = intent.getLongExtra("id",0)
         binding.apply {
             tvAi.typeface = Typeface.createFromAsset(assets, "FZSTK.TTF")
             rvChat.apply {
@@ -69,14 +95,7 @@ class ChatActivity : AppCompatActivity() {
 
     private fun initObserver() {
         viewModel.messageList.observe(this) { list ->
-            val wasEmpty = mAdapter.itemCount == 0
-            mAdapter.submitList(ArrayList(list)) {
-                if (list.isNotEmpty()) {
-                    if (wasEmpty || isUserNearBottom()) {
-                        binding.rvChat.smoothScrollToPosition(list.size - 1)
-                    }
-                }
-            }
+            mAdapter.submitList(ArrayList(list))
         }
 
         viewModel.isLoading.observe(this) { loading ->
@@ -89,15 +108,9 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
-    private fun isUserNearBottom(): Boolean {
-        val layoutManager = binding.rvChat.layoutManager as LinearLayoutManager
-        val lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPosition()
-        val totalItemCount = layoutManager.itemCount
-
-        return totalItemCount == 0 || lastVisibleItem >= totalItemCount - 3
-    }
 
     private fun initEvent() {
+
         binding.btnSend.setOnClickListener {
             val content = binding.etMessage.text.toString().trim()
             if (content.isNotBlank()) {
@@ -108,7 +121,17 @@ class ChatActivity : AppCompatActivity() {
             }
         }
         binding.btnMenu.setOnClickListener {
-            MainActivity.start(this)
+            this.finish()
+        }
+    }
+
+    companion object{
+        private var id: Long = -1
+        fun start(context: Context,id: Long){
+            this.id = id
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
         }
     }
 }

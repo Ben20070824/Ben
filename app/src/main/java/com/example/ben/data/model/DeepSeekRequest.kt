@@ -1,10 +1,12 @@
 package com.example.ben.data.model
+
 data class DeepSeekRequest(
     val model: String = "deepseek-v4-pro",
     val messages: List<Message>,
     val reason_effort: String = "high",
     val max_tokens :Int = 10000,
-    val stream: Boolean = false
+    val stream: Boolean = false,
+    val temperature: Float = 0.7f
 )
 
 //往后可以试试用流式输出，现在水平不够
@@ -21,6 +23,10 @@ sealed class Message{
         val role: String?,
         val content: String?,
         val reasoning_content: String?
+    ) : Message()
+    data class SystemMessage(
+        val role: String?,
+        val content: String?,
     ) : Message()
 }
 data class DeepSeekResponse(

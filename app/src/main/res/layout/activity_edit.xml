@@ -81,7 +81,11 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入账号"
                 android:textSize="20dp"
-                android:gravity="center_horizontal"/>
+                android:focusable="false"
+                android:clickable="false"
+                android:cursorVisible="false"
+                android:gravity="center_horizontal"
+                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

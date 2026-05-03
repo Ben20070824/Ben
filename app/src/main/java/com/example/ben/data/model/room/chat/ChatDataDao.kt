@@ -1,5 +1,6 @@
-package com.example.ben.data.model.room1
+package com.example.ben.data.model.room.chat
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -19,4 +20,7 @@ interface ChatDataDao {
 
     @Query("SELECT * FROM ChatData WHERE id = :id")
     suspend fun getChatById(id: Long): ChatData?
+
+    @Query("SELECT * FROM CHATDATA WHERE account = :account")
+    fun getChatsByAccount(account: String): LiveData<List<ChatData>>
 }

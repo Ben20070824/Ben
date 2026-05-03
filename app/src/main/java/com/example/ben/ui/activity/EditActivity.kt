@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.ben.MyApplication
 import com.example.ben.R
 import com.example.ben.databinding.ActivityEditBinding
 import com.example.ben.viewmodel.user.EditViewModel
@@ -30,10 +31,12 @@ class EditActivity : AppCompatActivity() {
         initEvent()
         initObserver()
     }
-
     private fun initEvent() {
         binding.btnChange.setOnClickListener {
             Toast.makeText(this,"更多功能，敬请期待！", Toast.LENGTH_SHORT).show()
+        }
+        binding.etAccountText.setOnClickListener {
+            Toast.makeText(this,"账号是唯一标识，暂不支持修改~~~", Toast.LENGTH_SHORT).show()
         }
         binding.btnEdit.setOnClickListener {
             val account = binding.etAccountText.text.toString().trim()

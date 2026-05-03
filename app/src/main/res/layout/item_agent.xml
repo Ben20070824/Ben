@@ -2,12 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingVertical="16dp"
-    android:paddingHorizontal="16dp"
-    android:gravity="center_vertical">
+    android:orientation="horizontal">
 
-    <!-- 头像（彩色圆形背景 + 聊天气泡图标） -->
     <FrameLayout
         android:id="@+id/fl_avatar"
         android:layout_width="64dp"
@@ -23,27 +19,41 @@
         <ImageView
             android:id="@+id/iv_chat_icon"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_chat_bubble" />
+            android:src="@drawable/ic_agent" />
     </FrameLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="1"
-        android:orientation="vertical">
-
+        android:gravity="center"
+        android:orientation="vertical" >
         <TextView
-            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/tv_agent_name"
             android:textSize="20sp"
-            android:textColor="@android:color/black"
+            android:hint="示例：豆儿包"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_agent_detail"
+            android:hint="这里是介绍详情~~~"
             android:maxLines="1"
             android:ellipsize="end"/>
-
-
     </LinearLayout>
 
+    <ImageButton
+        android:layout_gravity="center"
+        android:id="@+id/btn_detail"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/detail"
+        android:scaleType="fitCenter"/>
 </LinearLayout>

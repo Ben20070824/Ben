@@ -1,4 +1,4 @@
-package com.example.ben.adapter
+package com.example.ben.adapter.rvadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ben.data.model.Message
 import com.example.ben.databinding.ItemChatAiBinding
 import com.example.ben.databinding.ItemChatMeBinding
+import com.example.ben.databinding.ItemEmptyBinding
 
 class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCallback()) {
     companion object {
@@ -19,6 +20,7 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
         return when (getItem(position)) {
             is Message.AiMessage -> VIEW_TYPE_AI
             is Message.MyMessage -> VIEW_TYPE_ME
+            else -> -1
         }
     }
 
@@ -33,7 +35,10 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
                 val binding = ItemChatMeBinding.inflate(inflater, parent, false)
                 MeViewHolder(binding)
             }
-            else -> throw IllegalArgumentException("Invalid view type: $viewType")
+            else -> {
+                val binding = ItemEmptyBinding.inflate(inflater,parent,false)
+                EmptyVH(binding)
+            }
         }
     }
 
@@ -42,6 +47,7 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
         when (holder) {
             is AiViewHolder -> holder.bind(message as Message.AiMessage)
             is MeViewHolder -> holder.bind(message as Message.MyMessage)
+            else -> {}
         }
     }
 
@@ -62,6 +68,8 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
             binding.tvMessage.text = message.content
         }
     }
+    // 空白占位VH，无内容
+    class EmptyVH(binding: ItemEmptyBinding) : RecyclerView.ViewHolder(binding.root)
 
     class MessageDiffCallback : DiffUtil.ItemCallback<Message>() {
         override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {

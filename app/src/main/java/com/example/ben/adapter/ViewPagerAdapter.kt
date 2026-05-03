@@ -12,5 +12,4 @@ class ViewPagerAdapter(val activity: MainActivity,private val fragments: List<()
     override fun getItemCount(): Int {
         return fragments.size
     }
-
 }
