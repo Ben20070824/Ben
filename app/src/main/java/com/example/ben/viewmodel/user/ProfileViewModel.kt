@@ -1,10 +1,11 @@
-package com.example.ben.viewmodel
+package com.example.ben.viewmodel.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.MyApplication
+import com.example.ben.data.respository.UserRepository
 import com.example.ben.data.room.UserDataBase
 import com.example.ben.data.room.UserDao
 import com.example.ben.data.room.User

@@ -1,17 +1,19 @@
-package com.example.ben.viewmodel
+package com.example.ben.viewmodel.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.MyApplication
+import com.example.ben.data.respository.UserRepository
 import com.example.ben.data.room.UserDataBase
 import com.example.ben.data.room.UserDao
 import com.example.ben.data.room.User
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class EditViewModel : ViewModel() {
-    private val userDao : UserDao = UserDataBase.getDatabase().userDao()
+    private val userRepository = UserRepository()
 
     private val _user = MutableLiveData<User?>()
     private val _toastMsg = MutableLiveData<String>()
@@ -27,15 +29,14 @@ class EditViewModel : ViewModel() {
         viewModelScope.launch {
             val account = MyApplication.account
             if (account.isNotBlank()) {
-                val user = userDao.getUserByAccountUser(account)
-                _user.postValue(user)
+                _user.value=userRepository.getUserByAccount(account)
             } else {
-                _user.postValue(null)
+                _user.value = null
             }
         }
     }
 
-    fun editSucceed(account: String, nickname: String, gender: String, age: Int, birth: String, city: String, university: String, signature: String){
+    fun updateUser(account: String, nickname: String, gender: String, age: Int, birth: String, city: String, university: String, signature: String){
         val userModify = user.value
         if (userModify == null) {
             _toastMsg.value = "用户信息加载失败"
@@ -52,7 +53,7 @@ class EditViewModel : ViewModel() {
         userModify.signature = signature
 
         viewModelScope.launch {
-            userDao.updateUserInfo(userModify)
+            userRepository.updateUser(userModify)
             MyApplication.account = userModify.account
             _toastMsg.value = "编辑成功"
         }

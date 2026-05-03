@@ -11,7 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ben.R
 import com.example.ben.databinding.ActivityLoginBinding
-import com.example.ben.viewmodel.LoginViewModel
+import com.example.ben.viewmodel.user.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
     private val viewModel : LoginViewModel by viewModels()

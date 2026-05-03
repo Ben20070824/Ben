@@ -1,17 +1,15 @@
-package com.example.ben.viewmodel
+package com.example.ben.viewmodel.user
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ben.data.room.UserDataBase
-import com.example.ben.data.room.UserDao
+import com.example.ben.data.respository.UserRepository
 import com.example.ben.data.room.User
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
-    private val userDao : UserDao by lazy { UserDataBase.getDatabase().userDao()  }
+    private val userRepository = UserRepository()
     private var _registerState = MutableLiveData<Boolean>()
     private var _toastMsg = MutableLiveData<String>()
 
@@ -35,14 +33,11 @@ class RegisterViewModel : ViewModel() {
             _toastMsg.value = "未同意用户协议"
             return
         }
+
         viewModelScope.launch {
-            val user = userDao.getUserByAccount(account)
-            if(user.value==null){
-                userDao.insertUser(User(account=account, password = password))
-                val user = userDao.getUserByAccountUser(account)
-                if(user!=null){
-                    Log.d("Ben","注册成功"+user.account)
-                } else Log.d("Ben","注册失败")
+            val user = userRepository.getUserByAccount(account)
+            if(user==null){
+                userRepository.insertUser(User(account=account, password = password))
                 _registerState.value=true
             } else {
                 _toastMsg.value = "用户已存在"
