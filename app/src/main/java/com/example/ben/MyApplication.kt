@@ -7,6 +7,8 @@ class MyApplication : Application() {
     companion object{
         lateinit var globalContext: Context
             private set
+
+        var account: String = ""
     }
 
     override fun onCreate() {
