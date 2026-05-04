@@ -16,12 +16,14 @@ class AgentChatViewModel : ViewModel() {
     private var _begin = MutableLiveData<String>()
     private var _list = MutableLiveData<List<Message>>()
     private var _model = MutableLiveData<String>()
+    private var _isThinking = MutableLiveData(false)
     private var temperature : Float = 0.7f
 
     val list : LiveData<List<Message>> = _list
     val model : LiveData<String> = _model
     val name : LiveData<String> = _name
     val begin : LiveData<String> = _begin
+    val isThinking : LiveData<Boolean> = _isThinking
 
     fun init(id : Int){
         viewModelScope.launch {
@@ -63,9 +65,10 @@ class AgentChatViewModel : ViewModel() {
     fun callAi(){
         val currentModel = _model.value ?: "deepseek-v4-flash"
         val currentList = _list.value ?: return
-
+        _isThinking.value=true
         repository.callAi(currentModel, currentList, temperature){list->
             _list.value = list
+            _isThinking.value = false
             viewModelScope.launch{
                 repository.updateAgent(agentData.copy(chatList = list))
             }

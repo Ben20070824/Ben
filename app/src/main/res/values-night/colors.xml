@@ -3,6 +3,8 @@
     <!-- 黑白基础 -->
     <color name="color_white">#FF0F0F0F</color>
     <color name="color_black">#F5F5F5</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
 
     <!-- 主题主色 -->
     <color name="color_primary">#40A9FF</color>
@@ -12,9 +14,7 @@
     <color name="text_main">#F2F3F5</color>
     <color name="text_secondary">#6E7681</color>
     <color name="text_hint">#4E5969</color>
-    <!-- 新增 暗夜浅绿色（护眼暗调） -->
-    <color name="color_green_light">#1A3B38</color>
-    <color name="color_green">#27B3A7</color>
+
     <!-- 背景色 -->
     <color name="bg_root">#121212</color>
     <color name="bg_card">#1F1F1F</color>
@@ -26,4 +26,9 @@
     <color name="color_success">#00C48C</color>
     <color name="color_warning">#FF9500</color>
     <color name="color_danger">#FF4D4F</color>
+
+    <!-- 账号管理模块颜色 -->
+    <color name="green">#00C48C</color>
+    <color name="color_green">#27B3A7</color>
+    <color name="color_green_light">#1A3B38</color>
 </resources>

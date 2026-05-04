@@ -29,4 +29,6 @@
 
     <!-- 账号管理模块颜色 -->
     <color name="green">#4CAF50</color>
+    <color name="color_green">#27B3A7</color>
+    <color name="color_green_light">#2E8B57</color>
 </resources>

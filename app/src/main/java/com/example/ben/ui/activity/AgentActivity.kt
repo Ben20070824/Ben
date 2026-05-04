@@ -73,6 +73,10 @@ class AgentActivity : AppCompatActivity() {
         viewModel.begin.observe(this){begin->
             binding.tvBegin.text=begin
         }
+        viewModel.isThinking.observe(this){isThink->
+            if(isThink)  binding.etMessage.hint = "我正在思考哦"
+            else binding.etMessage.hint="快来给我发送信息吧~~~"
+        }
     }
 
     private fun initEvent() {
@@ -91,7 +95,6 @@ class AgentActivity : AppCompatActivity() {
             viewModel.addMessage(content)
             binding.etMessage.text.clear()
         }
-
     }
 
     companion object {

@@ -56,6 +56,7 @@ class AgentFragment : Fragment() {
     }
 
     private fun initEvent() {
+        viewModel.initAccount()
         binding.btnAdd.setOnClickListener {
             AgentEditActivity.start(requireContext())
         }

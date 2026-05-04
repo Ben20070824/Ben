@@ -52,11 +52,7 @@ class AgentEditActivity : AppCompatActivity() {
             val begin = binding.etGreeting.text.toString().trim()
             val temperature = binding.seekbarTemperature.progress / 50.0f
 
-            if (id == -1) {
-                return@setOnClickListener
-            } else {
-                viewModel.update(id, name, introduction, prompt, begin, temperature)
-            }
+            viewModel.update(id, name, introduction, prompt, begin, temperature)
             finish()
         }
         binding.btnCancel.setOnClickListener {
