@@ -45,14 +45,16 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val message = getItem(position)
         when (holder) {
-            is AiViewHolder -> holder.bind(message as Message.AiMessage)
+            is AiViewHolder -> {
+                holder.bind(message as Message.AiMessage)
+            }
             is MeViewHolder -> holder.bind(message as Message.MyMessage)
             else -> {}
         }
     }
 
     inner class AiViewHolder(
-        private val binding: ItemChatAiBinding
+        val binding: ItemChatAiBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(message: Message.AiMessage) {
@@ -61,9 +63,8 @@ class ChatAdapter : ListAdapter<Message, RecyclerView.ViewHolder>(MessageDiffCal
     }
 
     inner class MeViewHolder(
-        private val binding: ItemChatMeBinding
+        val binding: ItemChatMeBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(message: Message.MyMessage) {
             binding.tvMessage.text = message.content
         }

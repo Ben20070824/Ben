@@ -30,7 +30,6 @@ class ChatLogAdapter : ListAdapter<ChatData, ChatLogAdapter.MyViewHolder>(ChatDi
 
 
     inner class MyViewHolder(private val binding: ItemLogBinding) : RecyclerView.ViewHolder(binding.root){
-
         fun onBind(chatData: ChatData){
             binding.apply {
                 tvTitle.text = chatData.title

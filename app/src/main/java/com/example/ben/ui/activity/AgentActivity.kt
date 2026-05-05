@@ -3,6 +3,7 @@ package com.example.ben.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -71,6 +72,9 @@ class AgentActivity : AppCompatActivity() {
     private fun initObserver() {
         viewModel.list.observe(this) { list ->
             myAdapter.submitList(list)
+            if (list.size == 0) return@observe
+            binding.rvAgent.smoothScrollToPosition(list.size-1)
+            Log.d("ljh","滑动成功")
         }
         viewModel.name.observe(this){name->
             binding.tvAi.text=name

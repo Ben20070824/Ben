@@ -10,6 +10,8 @@ import com.example.ben.data.repository.ChatRepository
 import kotlinx.coroutines.launch
 
 class ChatViewModel : ViewModel() {
+    private var lastSendTime = 0L
+    private val coolDownloads = 800L
     private val repository = ChatRepository()
     private val _messageList = MutableLiveData<MutableList<Message>>(mutableListOf())
     private val _isLoading = MutableLiveData<Boolean>(false)
@@ -36,7 +38,12 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun callAi(message: String){
+    fun callAi(message: String,time: Long){
+        if (time-lastSendTime < coolDownloads){
+            lastSendTime = time
+            return
+        }
+        lastSendTime = time
         _isLoading.value=true
         _messageList.value?.add(Message.MyMessage("user",message)) ?: return
         _messageList.value=_messageList.value

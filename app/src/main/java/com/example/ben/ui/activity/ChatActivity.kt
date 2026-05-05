@@ -24,7 +24,6 @@ class ChatActivity : AppCompatActivity() {
     private val binding: ActivityChatBinding by lazy { ActivityChatBinding.inflate(layoutInflater) }
     private val viewModel: ChatViewModel by viewModels()
     private val mAdapter = ChatAdapter()
-    private var chatId: Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +35,6 @@ class ChatActivity : AppCompatActivity() {
             insets
         }
 
-        chatId = getChatId()
 
         initView()
         initObserver()
@@ -45,22 +43,14 @@ class ChatActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        if (chatId > 0) {
+        if (id > 0) {
             lifecycleScope.launch {
-                viewModel.initChat(chatId)
+                viewModel.initChat(id)
             }
         }
     }
 
-    private fun getChatId(): Long {
-        return try {
-            val field = ChatActivity::class.java.getDeclaredField("id")
-            field.isAccessible = true
-            field.getLong(null)
-        } catch (e: Exception) {
-            -1L
-        }
-    }
+
 
     private fun initView() {
         binding.apply {
@@ -96,6 +86,8 @@ class ChatActivity : AppCompatActivity() {
     private fun initObserver() {
         viewModel.messageList.observe(this) { list ->
             mAdapter.submitList(ArrayList(list))
+            if(list.size==0) return@observe
+            binding.rvChat.smoothScrollToPosition(list.size-1)
         }
 
         viewModel.isLoading.observe(this) { loading ->
@@ -110,11 +102,10 @@ class ChatActivity : AppCompatActivity() {
 
 
     private fun initEvent() {
-
         binding.btnSend.setOnClickListener {
             val content = binding.etMessage.text.toString().trim()
             if (content.isNotBlank()) {
-                viewModel.callAi(content)
+                viewModel.callAi(content,System.currentTimeMillis())
                 binding.etMessage.text.clear()
             } else {
                 Toast.makeText(this, "请输入消息内容", Toast.LENGTH_SHORT).show()
