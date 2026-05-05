@@ -89,12 +89,8 @@ class AgentEditActivity : AppCompatActivity() {
 
     companion object {
         private var id: Int = -1
-        fun start(context: Context) {
-            val intent = Intent(context, AgentEditActivity::class.java)
-            context.startActivity(intent)
-        }
 
-        fun startFromChat(context: Context, id: Int) {
+        fun start(context: Context, id: Int) {
             this.id = id
             val intent = Intent(context, AgentEditActivity::class.java)
             context.startActivity(intent)

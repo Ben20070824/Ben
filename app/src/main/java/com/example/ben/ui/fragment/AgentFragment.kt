@@ -42,7 +42,7 @@ class AgentFragment : Fragment() {
                 AgentActivity.start(requireContext(), id)
             }
             myAdapter.onButtonClick = { id->
-                AgentEditActivity.startFromChat(requireContext(),id)
+                AgentEditActivity.start(requireContext(),id)
             }
             adapter = myAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -58,7 +58,7 @@ class AgentFragment : Fragment() {
     private fun initEvent() {
         viewModel.initAccount()
         binding.btnAdd.setOnClickListener {
-            AgentEditActivity.start(requireContext())
+            AgentEditActivity.start(requireContext(),-1)
         }
     }
 

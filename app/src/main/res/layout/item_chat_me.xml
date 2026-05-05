@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="end"
-    android:padding="6dp"
     android:orientation="horizontal">
 
     <TextView
@@ -11,10 +10,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/msg_right"
+        android:gravity="center"
         android:paddingLeft="20dp"
         android:paddingTop="12dp"
         android:paddingRight="30dp"
-        android:paddingBottom="12dp"
         android:textSize="16sp"
         android:textColor="@android:color/black"/>
 

@@ -7,7 +7,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 顶部栏 -->
     <LinearLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
@@ -61,7 +60,6 @@
 
     </LinearLayout>
 
-    <!-- 内容区域 自动避开底部输入栏 -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -110,7 +108,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_agent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="15dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@id/cv_begin"
@@ -120,7 +118,6 @@
 
     </ScrollView>
 
-    <!-- 底部输入栏 固定在最下方 不重叠 -->
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"

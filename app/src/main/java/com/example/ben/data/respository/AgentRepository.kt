@@ -29,6 +29,10 @@ class AgentRepository {
     suspend fun getAgentDataById(id : Int) : AgentData?{
         return agentDataDao.getAgentById(id)
     }
+    suspend fun getAgentsDataByAccount(account: String) : List<AgentData>?{
+        return agentDataDao.getAgentsByAccount(account)
+    }
+
     fun callAi(model: String,messageList: List<Message>,temperature : Float,callback: (List<Message>) -> Unit){
         val messages = messageList.toMutableList()
         val deepSeekRequest = DeepSeekRequest(model = model, messages = messageList,temperature = temperature)

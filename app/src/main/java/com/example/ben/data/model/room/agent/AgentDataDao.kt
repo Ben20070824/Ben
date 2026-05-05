@@ -16,4 +16,6 @@ interface AgentDataDao {
     suspend fun getAgentById(id: Int): AgentData?
     @Query("SELECT * FROM agentdata WHERE account = :account")
     fun getAgentByAccount(account: String): LiveData<List<AgentData>>
+    @Query("SELECT * FROM agentdata WHERE account = :account")
+    suspend fun getAgentsByAccount(account: String): List<AgentData>?
 }

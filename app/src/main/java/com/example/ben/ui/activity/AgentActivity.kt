@@ -35,6 +35,11 @@ class AgentActivity : AppCompatActivity() {
         initObserver()
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.init(id)
+    }
+
     private fun initView() {
         binding.rvAgent.apply {
             adapter = myAdapter
@@ -80,12 +85,11 @@ class AgentActivity : AppCompatActivity() {
     }
 
     private fun initEvent() {
-        viewModel.init(id)
         binding.btnMenu.setOnClickListener {
             finish()
         }
         binding.btnEdit.setOnClickListener {
-            AgentEditActivity.startFromChat(this, id)
+            AgentEditActivity.start(this, id)
         }
         binding.btnSend.setOnClickListener {
             val content = binding.etMessage.text.toString().trim()
