@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.data.model.Message
 import com.example.ben.data.model.room.agent.AgentData
-import com.example.ben.data.respository.AgentRepository
+import com.example.ben.data.repository.AgentRepository
 import kotlinx.coroutines.launch
 
 class AgentChatViewModel : ViewModel() {
@@ -41,7 +41,6 @@ class AgentChatViewModel : ViewModel() {
 
             chatList.add(systemMessage)
             temperature = agentData.temperature
-
             _list.value = chatList
         }
     }

@@ -1,4 +1,5 @@
-package com.example.ben.data.room
+package com.example.ben.data.model.room.user
+
 
 import androidx.room.Database
 import androidx.room.Room

@@ -10,7 +10,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.ben.MyApplication
 import com.example.ben.R
 import com.example.ben.databinding.ActivityEditBinding
 import com.example.ben.viewmodel.user.EditViewModel

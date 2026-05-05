@@ -1,54 +1,41 @@
-package com.example.ben.data.respository
+package com.example.ben.data.repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.ben.BuildConfig
-import com.example.ben.MyApplication
-import com.example.ben.data.model.room.chat.ChatData
-import com.example.ben.data.model.room.chat.ChatDataBaseClient
 import com.example.ben.data.model.DeepSeekRequest
 import com.example.ben.data.model.DeepSeekResponse
 import com.example.ben.data.model.Message
+import com.example.ben.data.model.room.agent.AgentData
+import com.example.ben.data.model.room.agent.AgentDataBase
 import com.example.ben.data.remote.RetrofitClient
-import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
-class ChatRepository {
-    private val chatDataDao =
-        ChatDataBaseClient.getDatabase(MyApplication.globalContext).chatDataDao()
-    private val apiKey = BuildConfig.API_KEY
-    private lateinit var chatData: ChatData
-    private var id: Long = -1
+class AgentRepository {
+    private val database = AgentDataBase.getDataBase()
+    private val agentDataDao = database.agentDataDao()
 
-    fun getChatData(): ChatData? {
-        return if (::chatData.isInitialized) chatData else null
+    suspend fun insertAgent(agentData: AgentData){
+        agentDataDao.insertAgent(agentData)
+    }
+    suspend fun updateAgent(agentData: AgentData){
+        agentDataDao.updateAgent(agentData)
+    }
+    fun getAgentByAccount(account: String): LiveData<List<AgentData>>{
+        return agentDataDao.getAgentByAccount(account)
+    }
+    suspend fun getAgentDataById(id : Int) : AgentData?{
+        return agentDataDao.getAgentById(id)
+    }
+    suspend fun getAgentsDataByAccount(account: String) : List<AgentData>?{
+        return agentDataDao.getAgentsByAccount(account)
     }
 
-    suspend fun init(id: Long) {
-        this.id = id
-        chatData = chatDataDao.getChatById(id) ?: return
-    }
-
-    suspend fun updateChat(list: List<Message>) {
-        if (::chatData.isInitialized) {
-            chatDataDao.updateChat(ChatData(id, MyApplication.account, list, MyApplication.title))
-            Log.d("ljh", list.toString())
-        }
-    }
-
-    suspend fun insertChat(chatData: ChatData) {
-        chatDataDao.insertChat(chatData)
-    }
-
-    fun getChatsByAccount(account: String) : LiveData<List<ChatData>>{
-        return chatDataDao.getChatsByAccount(account)
-    }
-
-    fun callAi(model: String,messageList: List<Message>,callback: (List<Message>) -> Unit){
+    fun callAi(model: String,messageList: List<Message>,temperature : Float,callback: (List<Message>) -> Unit){
         val messages = messageList.toMutableList()
-        val deepSeekRequest = DeepSeekRequest(model = model, messages = messageList)
+        val deepSeekRequest = DeepSeekRequest(model = model, messages = messageList,temperature = temperature)
         RetrofitClient.request.sendChat(BuildConfig.API_KEY,deepSeekRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -77,6 +64,5 @@ class ChatRepository {
                     callback(messages)
                 }
             })
-
     }
 }

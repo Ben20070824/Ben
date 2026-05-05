@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.MyApplication
 import com.example.ben.data.model.Message
-import com.example.ben.data.respository.ChatRepository
+import com.example.ben.data.repository.ChatRepository
 import kotlinx.coroutines.launch
 
 class ChatViewModel : ViewModel() {

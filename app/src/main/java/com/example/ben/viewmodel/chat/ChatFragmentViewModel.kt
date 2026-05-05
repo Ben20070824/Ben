@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.MyApplication
 import com.example.ben.data.model.room.chat.ChatData
-import com.example.ben.data.respository.ChatRepository
+import com.example.ben.data.repository.ChatRepository
 import kotlinx.coroutines.launch
 
 class ChatFragmentViewModel : ViewModel() {

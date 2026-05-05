@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ben.data.respository.UserRepository
-import com.example.ben.data.room.User
+import com.example.ben.data.model.room.user.User
+import com.example.ben.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
@@ -37,7 +37,7 @@ class RegisterViewModel : ViewModel() {
         viewModelScope.launch {
             val user = userRepository.getUserByAccount(account)
             if(user==null){
-                userRepository.insertUser(User(account=account, password = password))
+                userRepository.insertUser(User(account = account, password = password))
                 _registerState.value=true
             } else {
                 _toastMsg.value = "用户已存在"

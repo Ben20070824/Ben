@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.MyApplication
-import com.example.ben.data.respository.UserRepository
-import com.example.ben.data.room.User
+import com.example.ben.data.model.room.user.User
+import com.example.ben.data.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class EditViewModel : ViewModel() {

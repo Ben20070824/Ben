@@ -42,10 +42,15 @@ class LoginActivity : AppCompatActivity() {
             toastMsg.observe(this@LoginActivity) {toastMsg ->
                 Toast.makeText(this@LoginActivity,toastMsg, Toast.LENGTH_SHORT).show()
             }
+            autoLogin.observe(this@LoginActivity){autoLogin->
+                if(autoLogin) MainActivity.start(this@LoginActivity)
+                else return@observe
+            }
         }
     }
 
     private fun initEvent() {
+        viewModel.autoLogin()
         binding.apply {
             btnRegister.setOnClickListener {
                 RegisterActivity.start(this@LoginActivity)

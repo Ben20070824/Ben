@@ -1,6 +1,5 @@
-package com.example.ben.data.room
+package com.example.ben.data.model.room.user
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -14,9 +13,6 @@ interface UserDao {
 
     @Query("SELECT * FROM users WHERE nickname = :nickname")
     suspend fun getUserByNickname(nickname: String) : User?
-
-    @Query("SELECT * FROM users WHERE account = :account")
-    fun getUserByAccount(account: String): LiveData<User>
 
     @Query("SELECT * FROM users WHERE account = :account")
     suspend fun getUserByAccountUser(account: String) : User?

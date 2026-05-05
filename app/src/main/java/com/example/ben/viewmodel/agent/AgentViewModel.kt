@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ben.MyApplication
 import com.example.ben.data.model.room.agent.AgentData
-import com.example.ben.data.respository.AgentRepository
+import com.example.ben.data.repository.AgentRepository
 import kotlinx.coroutines.launch
 
 class AgentViewModel : ViewModel() {

@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.ben.R
-import com.example.ben.data.room.UserDataBase
-import com.example.ben.data.room.UserDao
+import com.example.ben.data.model.room.user.UserDao
+import com.example.ben.data.model.room.user.UserDataBase
 import com.example.ben.databinding.ActivityRegisterBinding
 import com.example.ben.viewmodel.user.RegisterViewModel
 
